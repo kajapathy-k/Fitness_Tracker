@@ -6,6 +6,7 @@ metadata:
 spec:
   parentRefs:
   - name: fitness-gateway
+    namespace: gateway-ns
   rules:
   - matches:
     - path:
