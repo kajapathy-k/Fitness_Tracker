@@ -6,7 +6,6 @@ metadata:
 spec:
   replicas: 2
 
-  
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -34,13 +33,27 @@ spec:
           ports:
             - containerPort: 5000
 
-          
+          # 🔥 OOM Simulation Script
+          command: ["/bin/sh"]
+          args:
+            - -c
+            - |
+              echo "Starting OOM simulation...";
+              i=0;
+              while true; do
+                i=$((i+1));
+                echo "Allocating chunk $i";
+                a="$a $(head -c 1M </dev/zero | tr '\0' 'a')";
+                sleep 0.1;
+              done
+
+          # 🔥 Reduced Memory (to trigger OOM quickly)
           resources:
             requests:
-              memory: "256Mi"
+              memory: "128Mi"
               cpu: "100m"
             limits:
-              memory: "512Mi"
+              memory: "200Mi"
               cpu: "200m"
 
           envFrom:
