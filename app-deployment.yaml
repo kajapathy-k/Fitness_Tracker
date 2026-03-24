@@ -5,17 +5,9 @@ metadata:
   namespace: gateway-ns
 spec:
   replicas: 2
-
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
-
   selector:
     matchLabels:
       app: fitness-tracker-app
-
   template:
     metadata:
       labels:
@@ -24,36 +16,12 @@ spec:
         ad.datadoghq.com/fitness-tracker-app.logs: >-
           [{"source":"nodejs","service":"fitness-tracker-service"},
            {"source":"nodejs","service":"fitness-tracker-app"}]
-
     spec:
       containers:
         - name: fitness-tracker-app
           image: pulkit197/fitness_tracker-master-copy3-fitness-app:latest
-
           ports:
             - containerPort: 5000
-
-          # 🔥 FOR LOOP + INFINITE LOOP (OOM GUARANTEED)
-          command: ["/bin/sh"]
-          args:
-            - -c
-            - |
-              echo "Starting FOR LOOP OOM simulation...";
-              while true; do
-                for i in $(seq 1 1000); do
-                  echo "Allocating chunk $i";
-                  a="$a $(head -c 5M </dev/zero | tr '\0' 'a')";
-                done
-              done
-
-          
-          resources:
-            requests:
-              memory: "32Mi"
-              cpu: "100m"
-            limits:
-              memory: "64Mi"
-              cpu: "200m"
 
           envFrom:
             - configMapRef:
