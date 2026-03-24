@@ -33,15 +33,17 @@ spec:
           ports:
             - containerPort: 5000
 
-          # 🔥 FOR LOOP OOM SCRIPT
+          # 🔥 FOR LOOP + INFINITE LOOP (OOM GUARANTEED)
           command: ["/bin/sh"]
           args:
             - -c
             - |
               echo "Starting FOR LOOP OOM simulation...";
-              for i in $(seq 1 10000); do
-                echo "Allocating chunk $i";
-                a="$a $(head -c 5M </dev/zero | tr '\0' 'a')";
+              while true; do
+                for i in $(seq 1 1000); do
+                  echo "Allocating chunk $i";
+                  a="$a $(head -c 5M </dev/zero | tr '\0' 'a')";
+                done
               done
 
           # 🔥 LOW MEMORY LIMIT
