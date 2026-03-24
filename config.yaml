@@ -19,4 +19,4 @@ metadata:
   namespace: gateway-ns
 type: Opaque
 data:
-  MONGODB_URI: "mongodb://mongodb-service:27017/fitness-tracker"
+  MONGODB_URI: bW9uZ29kYjovL21vbmdvZGItc2VydmljZToyNzAxNy9maXRuZXNzLXRyYWNrZXI=
