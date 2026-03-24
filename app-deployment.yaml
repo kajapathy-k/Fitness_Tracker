@@ -22,30 +22,40 @@ spec:
           image: pulkit197/fitness_tracker-master-copy3-fitness-app:latest
           ports:
             - containerPort: 5000
-          # ✔ All configMap vars removed
-          # ✔ Direct env variables added
+
+          envFrom:
+            - configMapRef:
+                name: fitness-tracker-config
+
           env:
-            - name: MONGODB_URI
-              value: "mongodb://mongodb-service:27017/fitness-tracker"
-            - name: PORT
-              value: "5000"
-            - name: HOST
-              value: "0.0.0.0"
-            - name: NODE_ENV
-              value: "production"
-            # Datadog APM (tracing) env variables
             - name: DD_AGENT_HOST
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
-            - name: DD_TRACE_AGENT_PORT
-              value: "8126"
-            - name: DD_ENV
-              value: "production"
-            - name: DD_SERVICE
-              value: "fitness-tracker-app"
-            - name: DD_VERSION
-              value: "1.0.0"
+          # ✔ All configMap vars removed
+          # ✔ Direct env variables added
+          # env:
+          #   - name: MONGODB_URI
+          #     value: "mongodb://mongodb-service:27017/fitness-tracker"
+          #   - name: PORT
+          #     value: "5000"
+          #   - name: HOST
+          #     value: "0.0.0.0"
+          #   - name: NODE_ENV
+          #     value: "production"
+          #   # Datadog APM (tracing) env variables
+          #   - name: DD_AGENT_HOST
+          #     valueFrom:
+          #       fieldRef:
+          #         fieldPath: status.hostIP
+          #   - name: DD_TRACE_AGENT_PORT
+          #     value: "8126"
+          #   - name: DD_ENV
+          #     value: "production"
+          #   - name: DD_SERVICE
+          #     value: "fitness-tracker-app"
+          #   - name: DD_VERSION
+          #     value: "1.0.0"
 ---
 
 apiVersion: v1
