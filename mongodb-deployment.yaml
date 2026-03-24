@@ -32,10 +32,15 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "200m"
-              
+
+        volumeMounts:
+        - name: kajapathy-db
+          mountPath: /data/db
+
       volumes:
         - name: kajapathy-db
-          emptyDir: {}
+          emptyDir:
+            sizeLimit: 512Mi
           
       #   volumeMounts:
       #   - name: mongodb-storage
