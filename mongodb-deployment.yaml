@@ -37,10 +37,20 @@ spec:
         - name: kajapathy-db
           mountPath: /data/db
 
+      # volumes:
+      #   - name: kajapathy-db
+      #     emptyDir:
+      #       sizeLimit: 512Mi
+
       volumes:
         - name: kajapathy-db
-          emptyDir:
-            sizeLimit: 512Mi
+          persistentVolumeClaim:
+            claimName: fitness-mongo-pvc
+
+
+
+
+
           
       #   volumeMounts:
       #   - name: mongodb-storage
