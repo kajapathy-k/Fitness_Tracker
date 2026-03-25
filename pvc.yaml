@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeclaim
+metadata:
+  name: fitness-mongo-pvc
+  namespace: gateway-ns
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+
+  
