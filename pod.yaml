@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: nginx-pod
-  namespace: pod-ns
+  namespace: praveen-ns
 spec:
   containers:
   - name: nginx-container
