@@ -10,7 +10,7 @@ spec:
 
   source:
     repoURL: https://github.com/kajapathy-k/Fitness_Tracker.git
-    targetRevision: main
+    targetRevision: master
     path: Fitness_Chart
 
   destination:
